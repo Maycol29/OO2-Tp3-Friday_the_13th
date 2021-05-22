@@ -7,18 +7,32 @@ Class {
 	#category : #Biblioteca
 }
 
+{ #category : #private }
+AdapterJson >> convertSocioToDict: aSocio [
+	^ Dictionary new
+		at: #nombre put: aSocio nombre;
+		at: #email put:
+			aSocio email;
+		at: #legajo put:
+			aSocio legajo;
+		yourself
+]
+
 { #category : #exporting }
-AdapterJson >> export:socios [
-|col|
-col:= socios collect: [:socio| (Dictionary new at: #nombre put: socio nombre ; at: #email put: socio email ; at: #legajo put: socio legajo ;
-yourself) ].
-
-
-^NeoJSONWriter toStringPretty: col.
-
+AdapterJson >> export: socios [
+	^ adaptee toStringPretty: (self makeDictionaryListWith: socios)
 ]
 
 { #category : #initialization }
 AdapterJson >> initialize [ 
-adaptee :=NeoJSONWriter new .
+adaptee := NeoJSONWriter .
+]
+
+{ #category : #private }
+AdapterJson >> makeDictionaryListWith: aSocioList [
+	| col |
+	col := aSocioList
+		collect:
+			[ :socio | self convertSocioToDict: socio ].
+	^ col
 ]
