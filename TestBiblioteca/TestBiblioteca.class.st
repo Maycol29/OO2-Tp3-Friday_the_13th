@@ -22,7 +22,7 @@ socios add:s2.
 
 { #category : #tests }
 TestBiblioteca >> testAgregarSocio [
-self assert:(socios size=2).
+self assert:socios size equals:2.
 self assert:(socios includes:s1).
 self assert:(socios includes:s2).
 ]
