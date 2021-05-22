@@ -1,5 +1,5 @@
 Class {
-	#name : #AdapterJson,
+	#name : #AdapterJSON,
 	#superclass : #Object,
 	#instVars : [
 		'adaptee'
@@ -8,7 +8,7 @@ Class {
 }
 
 { #category : #private }
-AdapterJson >> convertSocioToDict: aSocio [
+AdapterJSON >> convertSocioToDict: aSocio [
 	^ Dictionary new
 		at: #nombre put: aSocio nombre;
 		at: #email put: aSocio email;
@@ -17,16 +17,16 @@ AdapterJson >> convertSocioToDict: aSocio [
 ]
 
 { #category : #exporting }
-AdapterJson >> export: socios [
+AdapterJSON >> export: socios [
 	^ adaptee toStringPretty: (self makeDictionaryListWith: socios)
 ]
 
 { #category : #initialization }
-AdapterJson >> initialize [ 
-adaptee := NeoJSONWriter .
+AdapterJSON >> initialize [ 
+adaptee := STON .
 ]
 
 { #category : #private }
-AdapterJson >> makeDictionaryListWith: aSocioList [
+AdapterJSON >> makeDictionaryListWith: aSocioList [
 	^ aSocioList collect: [ :socio | self convertSocioToDict: socio ]
 ]
