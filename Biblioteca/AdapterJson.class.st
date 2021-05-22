@@ -11,10 +11,8 @@ Class {
 AdapterJson >> convertSocioToDict: aSocio [
 	^ Dictionary new
 		at: #nombre put: aSocio nombre;
-		at: #email put:
-			aSocio email;
-		at: #legajo put:
-			aSocio legajo;
+		at: #email put: aSocio email;
+		at: #legajo put: aSocio legajo;
 		yourself
 ]
 
@@ -30,9 +28,5 @@ adaptee := NeoJSONWriter .
 
 { #category : #private }
 AdapterJson >> makeDictionaryListWith: aSocioList [
-	| col |
-	col := aSocioList
-		collect:
-			[ :socio | self convertSocioToDict: socio ].
-	^ col
+	^ aSocioList collect: [ :socio | self convertSocioToDict: socio ]
 ]
